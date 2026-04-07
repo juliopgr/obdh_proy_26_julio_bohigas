@@ -341,7 +341,10 @@ FDroneSelfTest()
 0
 1
 
-0
+3
+{
+pus_service129_drone_selftest();
+}
 MsgDataHandler
 FGetConfig()
 0
@@ -350,17 +353,15 @@ FGetConfig()
 0
 1
 
-4
+2
 	
-		// Data access
-	
-	// ... =varSDroneSetUp;
+	pus_service129_setup(varSDroneSetUp);
 [ServiceRequest]
 Msg->data
 DroneMngCtrl
 SDroneSetUp
 CDDroneConfig
-
+EDROOMprioVeryHigh
 ReplyMsg
 FReplyDroneReady()
 0
@@ -369,7 +370,9 @@ FReplyDroneReady()
 0
 1
 
-0
+2
+
+pus_service129_drone_ready();
 [ServiceRequest]
 Msg->reply
 DroneMngCtrl
@@ -384,11 +387,10 @@ FExecDroneTC()
 0
 1
 
-4
+3
 	
-		// Data access
-	
-	// ... =varSDroneTC;
+
+varSDroneTC.ExecDroneTC();
 [ServiceRequest]
 Msg->data
 DroneMngCtrl
