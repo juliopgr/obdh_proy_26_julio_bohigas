@@ -5,8 +5,8 @@
 0
 0
 [Modificado]
-0
-0
+1
+1
 3
 [Estructura]
 [Version Estructura]
@@ -34,7 +34,24 @@ Timer
 EDROOMTimingSAP
 [FinPuertos]
 [ActoresComponente]
+1
+[Version Actor Componente]
+2
+DroneMng
+1
 0
+0
+10
+7
+EDROOMprioNormal
+
+[Version Grafico Actor Componente]
+0
+33.0078
+37.577
+70.3125
+56.0575
+CCDroneMng
 [FinActoresComponente]
 [Uniones]
 0
