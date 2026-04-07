@@ -97,7 +97,7 @@ I
 SelfTest
 ;
 ;
-;
+FDroneSelfTest();
 ;
 ;
 1
@@ -265,16 +265,16 @@ Ready
 DSubEst
 ;
 [Trigger]
- 
- 
+DroneMngCtrl
+SDroneSetUp
 true
  
  
  
+FGetConfig();
 ;
-;
-;
-0
+FReplyDroneReady();
+1
 ;
 [GraficoTransicion]
 [Version GraficoTransicion]
@@ -288,13 +288,13 @@ ExecTC
 DPEleccion
 ;
 [Trigger]
- 
- 
+DroneMngCtrl
+SDroneTC
 true
  
  
  
-;
+FExecDroneTC();
 ;
 ;
 0
@@ -330,9 +330,71 @@ true
 [VariablesConstantes]
 0
 [Metodos]
-0
+4
 [Version Metodos]
 21
+BasicAction
+FDroneSelfTest()
+0
+0
+0
+0
+1
+
+0
+MsgDataHandler
+FGetConfig()
+0
+0
+0
+0
+1
+
+4
+	
+		// Data access
+	
+	// ... =varSDroneSetUp;
+[ServiceRequest]
+Msg->data
+DroneMngCtrl
+SDroneSetUp
+CDDroneConfig
+
+ReplyMsg
+FReplyDroneReady()
+0
+0
+0
+0
+1
+
+0
+[ServiceRequest]
+Msg->reply
+DroneMngCtrl
+SDroneReady
+NULL
+EDROOMprioVeryHigh
+MsgDataHandler
+FExecDroneTC()
+0
+0
+0
+0
+1
+
+4
+	
+		// Data access
+	
+	// ... =varSDroneTC;
+[ServiceRequest]
+Msg->data
+DroneMngCtrl
+SDroneTC
+CDTCHandler
+EDROOMprioVeryHigh
 [MaquinasSubEstados]
 0
 [FinMaquinasSubEstados]
