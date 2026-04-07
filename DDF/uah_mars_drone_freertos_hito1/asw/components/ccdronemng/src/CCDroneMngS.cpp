@@ -1,6 +1,6 @@
 
 
-#include <public/uahmarsdrone_iface_v1.h>
+#include <public/ccdronemng_iface_v1.h>
 
 
 
@@ -10,7 +10,7 @@
 
 
 
-UAHMarsDrone::UAHMarsDrone(TEDROOMComponentID id,
+CCDroneMng::CCDroneMng(TEDROOMComponentID id,
 		TEDROOMUInt32 roomNumMaxMens,
 		TEDROOMPriority roomtaskPrio,
 		TEDROOMStackSizeType roomStack,
@@ -25,7 +25,7 @@ UAHMarsDrone::UAHMarsDrone(TEDROOMComponentID id,
 
 		// *******************  Timers  ********************
 
-		Timer(&EDROOMtimingSAP, 2 ),
+		DroneTimer(&EDROOMtimingSAP, 2 ),
 
 		// ***************	Top State  *****************
 
@@ -46,7 +46,7 @@ UAHMarsDrone::UAHMarsDrone(TEDROOMComponentID id,
 //************************** EDROOMConfig **********************************
 
 
-int UAHMarsDrone::EDROOMConfig()
+int CCDroneMng::EDROOMConfig()
 {
 
 
@@ -57,7 +57,7 @@ int UAHMarsDrone::EDROOMConfig()
 
 //************************** EDROOMStart **********************************
 
-int UAHMarsDrone::EDROOMStart()
+int CCDroneMng::EDROOMStart()
 {
 
 
@@ -82,7 +82,7 @@ int UAHMarsDrone::EDROOMStart()
 
 
 
-void UAHMarsDrone::EDROOMBehaviour()
+void CCDroneMng::EDROOMBehaviour()
 {
 
 	edroomTopState.EDROOMInit();
@@ -98,11 +98,11 @@ void UAHMarsDrone::EDROOMBehaviour()
 
 #ifdef _EDROOM_SYSTEM_CLOSE
 
-bool UAHMarsDrone::EDROOMIsComponentFinished()
+bool CCDroneMng::EDROOMIsComponentFinished()
 {
 
 
-	return ( DroneMng.EDROOMIsComponentFinished() && CEDROOMComponent::EDROOMIsComponentFinished());
+	return ( CEDROOMComponent::EDROOMIsComponentFinished());
 
 }
 
@@ -111,7 +111,7 @@ bool UAHMarsDrone::EDROOMIsComponentFinished()
 
 //****************** EDROOMMemory::SetMemory *******************************
 
-void UAHMarsDrone::CEDROOMMemory::SetMemory(TEDROOMUInt32 numMessages_ ,
+void CCDroneMng::CEDROOMMemory::SetMemory(TEDROOMUInt32 numMessages_ ,
 		CEDROOMMessage * MessagesMem_,
 		bool * MessagesMemMarks_,
 		TEDROOMUInt32 numberOfNodes_,
