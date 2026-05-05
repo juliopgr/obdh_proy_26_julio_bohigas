@@ -23,7 +23,7 @@ C:\Users\julit\OneDrive\Documentos\GitHub\obdh_proy_26_julio_bohigas\DJF\ITs\it_
 [MESP main Directory]
 C:\Users\julit\OneDrive\Documentos\GitHub\obdh_proy_26_julio_bohigas\DJF\ITs\it_asw_ccdronemng_freertos_hito3
 [MESP main prototype]
-void main (void)
+int main (void)
 [MESP main return]
 return 0;
 [Dyn Priority]
