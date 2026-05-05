@@ -32,7 +32,7 @@
 #include <public/emu_sc_channel_drv_v1.h>
 #include <public/emu_gss_v1.h>
 
-//TODO 15 Part1 Configure the ST[03] to obtain the following SIDs configuration
+//TODO 15 Part1 DONE Configure the ST[03] to obtain the following SIDs configuration
 
 //SID 0, Enabled, Collection Interval =3, Parameter Number = 6
 	//Param IDs { 0, 1, 2, 3, 4, UAH_DRONE_Wind,...},

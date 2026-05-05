@@ -39,9 +39,9 @@
 
 // ##########################  Estaba el 0, lo he cambiado al 3 por la practica. SE PODRIA HACER CON TCS   ##########################################################
 HK_config_t HKConfig[PUS_SERVICE3_MAX_NUM_OF_SIDS] = {
-		{ SIDDisabled, 0, 2, 0, 5, { 0, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0 } },
-		{ SIDDisabled, 10, 4, 0, 3, { 5, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
-		{ SIDEnabled, 11, 5, 0, 3, { 14, 15, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
+		{ SIDEnabled, 0, 3, 0, 6, { 0, 1, 2, 3, 4, UAH_DRONE_Wind, 0, 0, 0, 0, 0, 0 } },
+		{ SIDEnabled, 10, 2, 0, 6, { UAH_DRONE_X, UAH_DRONE_Y, UAH_DRONE_Z, UAH_DRONE_VX, UAH_DRONE_VY, UAH_DRONE_VZ, 0, 0, 0, 0, 0, 0 } },
+		{ SIDDisabled, 11, 5, 0, 2, { 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
 		{ SIDConfigUnused, 0, 0, 0, 0, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
 		{ SIDConfigUnused, 0, 0, 0, 0, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
 		{ SIDConfigUnused, 0, 0, 0, 0, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
