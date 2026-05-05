@@ -426,7 +426,7 @@ public:
 	protected:
 
 		//! State Identifiers
-		enum TEDROOMStateID{SubEstado0};
+		enum TEDROOMStateID{Standby};
 
 		//!Transition Identifiers
 		enum TEDROOMTransitionID{Transicion0,
@@ -501,13 +501,13 @@ public:
 
 		// ***********************************************************************
 
-		// Leaf SubState SubEstado0
+		// Leaf SubState Standby
 
 		// ***********************************************************************
 
 
 
-		TEDROOMTransId EDROOMSubEstado0Arrival();
+		TEDROOMTransId EDROOMStandbyArrival();
 
 	};
 
