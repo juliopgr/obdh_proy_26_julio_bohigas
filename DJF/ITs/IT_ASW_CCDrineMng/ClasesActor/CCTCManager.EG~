@@ -694,7 +694,7 @@ Top
 1
 [Version SubEstados]
 3
-SubEstado0
+Standby
 ;
 ;
 ;
@@ -718,7 +718,7 @@ SubEstado0
 Transicion0
 Init
 OPEntrada
-SubEstado0
+Standby
 DSubEst
 ;
 [Trigger]
