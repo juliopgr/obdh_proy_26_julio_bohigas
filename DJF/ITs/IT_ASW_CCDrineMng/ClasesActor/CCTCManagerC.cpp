@@ -769,7 +769,7 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::Arrival(
 		//From entry point Init
 		case (EDROOM_CTX_Top_0::Init):
 			edroomCurrentTrans.localId= Transicion0;
-			edroomNextState = SubEstado0;
+			edroomNextState = Standby;
 		//Invoke Synchronous Message 
 		FInvokeDroneSetUp();
 			break;
@@ -794,10 +794,10 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::Arrival(
 		switch(edroomNextState)
 		{
 
-				//Go to the state SubEstado0
-			case (SubEstado0):
-				//Arrival to state SubEstado0
-				edroomCurrentTrans=EDROOMSubEstado0Arrival();
+				//Go to the state Standby
+			case (Standby):
+				//Arrival to state Standby
+				edroomCurrentTrans=EDROOMStandbyArrival();
 				break;
 
 		}
@@ -823,13 +823,13 @@ void CCTCManager::EDROOM_SUB_Ready_1::EDROOMInit()
 
 	// ***********************************************************************
 
-	// Leaf SubState  SubEstado0
+	// Leaf SubState  Standby
 
 	// ***********************************************************************
 
 
 
-TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::EDROOMSubEstado0Arrival()
+TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::EDROOMStandbyArrival()
 {
 
 	TEDROOMTransId edroomCurrentTrans;
