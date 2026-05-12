@@ -111,6 +111,21 @@ void	CCTCManager::EDROOM_CTX_Top_0::FFwdBKGTC()
 
 
 
+void	CCTCManager::EDROOM_CTX_Top_0::FFwdDroneTC()
+
+{
+   //Allocate data from pool
+  CDTCHandler * pSDroneTC_Data = EDROOMPoolCDTCHandler.AllocData();
+	
+		// Complete Data 
+	
+	*pSDroneTC_Data=VCurrentTC;
+   //Send message 
+   DroneMngCtrl.send(SDroneTC,pSDroneTC_Data,&EDROOMPoolCDTCHandler); 
+}
+
+
+
 void	CCTCManager::EDROOM_CTX_Top_0::FFwdHK_FDIRTC()
 
 {
@@ -238,6 +253,16 @@ return VTCExecCtrl.IsBKGTC();
 
 
 
+bool	CCTCManager::EDROOM_CTX_Top_0::GFwdDroneTC()
+
+{
+
+return VTCExecCtrl.IsDroneTC();
+
+}
+
+
+
 bool	CCTCManager::EDROOM_CTX_Top_0::GFwdToHK_FDIR()
 
 {
@@ -254,31 +279,6 @@ bool	CCTCManager::EDROOM_CTX_Top_0::GToReboot()
 
 return VTCExecCtrl.IsRebootTC();
 
-}
-
-
-
-bool	CCTCManager::EDROOM_CTX_Top_0::GFwdDroneTC()
-
-{
-
-return VTCExecCtrl.IsDroneTC();
-
-}
-
-
-
-void	CCTCManager::EDROOM_CTX_Top_0::FFwdDroneTC()
-
-{
-   //Allocate data from pool
-  CDTCHandler * pSDroneTC_Data = EDROOMPoolCDTCHandler.AllocData();
-	
-		// Complete Data 
-	
-	*pSDroneTC_Data=VCurrentTC;
-   //Send message 
-   DroneMngCtrl.send(SDroneTC,pSDroneTC_Data,&EDROOMPoolCDTCHandler); 
 }
 
 
@@ -373,7 +373,7 @@ void	CCTCManager::EDROOM_CTX_Ready_1::FInvokeDroneSetUp()
 	
 		// Complete Data 
 	
-
+ 
  
 pSDroneSetUp_Data->ZMinBeforeAdvance=10;
 pSDroneSetUp_Data->DefaultKp=0.2;
@@ -766,17 +766,17 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::Arrival(
 			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
 			edroomNextState = edroomCurrentState;
 			break;
+		case (EDROOM_CTX_Top_0::HandleTC_FwdDroneTC):
+			//Memory Entry 
+			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
+			edroomNextState = edroomCurrentState;
+			break;
 		//From entry point Init
 		case (EDROOM_CTX_Top_0::Init):
 			edroomCurrentTrans.localId= Transicion0;
 			edroomNextState = Standby;
 		//Invoke Synchronous Message 
 		FInvokeDroneSetUp();
-			break;
-		case (EDROOM_CTX_Top_0::HandleTC_FwdDroneTC):
-			//Memory Entry 
-			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
-			edroomNextState = edroomCurrentState;
 			break;
 		case (EDROOM_CTX_Top_0::EDROOMMemoryTrans):
 			//Memory Entry added
