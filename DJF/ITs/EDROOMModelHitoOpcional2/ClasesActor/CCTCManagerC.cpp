@@ -375,18 +375,14 @@ void	CCTCManager::EDROOM_CTX_Ready_1::FForzarRechazo()
 
 {
 
-// 1. Cargamos el paquete de forma normal
-VAcceptReport = VCurrentTC.DoAcceptation();
+// 1. Creamos un reporte completamente limpio y vacío.
+// Al construirse, su estado interno se inicializa automáticamente como TCAcceptationNotProcessed.
+CDTCAcceptReport mi_reporte_vacio;
 
-// 2. EL HACK: Usamos una función de la librería PUS para forzar un error de subservicio.
-// En lugar de modificar la variable privada de la clase C++, llamamos a la función global 
-// pasándole el reporte de aceptación nativo de bajo nivel para inyectar el fallo:
-VAcceptReport.mAcceptReport = pus_service1_tc_acceptation_failure(NULL, TCAcceptationSubTypeError);
-
-// 3. Ejecutamos tu llamada reglamentaria. 
-// Ahora que el reporte va camuflado con un SubTypeError, la función tx_TM_1_2 
-// entrará por el "case" correcto del switch y mandará la telemetría al GSS.
-VCurrentTC.MngTCRejection(VAcceptReport);
+// 2. Se lo pasamos directamente a MngTCRejection.
+// Como el estado "NotProcessed" no es un "éxito", la función de telemetría PUS
+// abortará la aceptación y generará el reporte de rechazo TM[1,2].
+VCurrentTC.MngTCRejection(mi_reporte_vacio);
 
 }
 
