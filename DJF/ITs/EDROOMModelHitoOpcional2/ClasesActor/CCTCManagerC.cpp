@@ -805,7 +805,7 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::Arrival(
 					edroomContextExit=0;
 					break;
 
-				case (Rechazo de TC):
+				case (Rechazo_TC):
 				//Msg->Data Handling 
 				FGetTC();
 				//Execute Action 
@@ -948,8 +948,8 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::EDROOMDroneFlyArrival()
 				 if (*Msg->GetPInterface() == RxTC)
 				{
 
-					//Next transition is  Rechazo de TC
-					edroomCurrentTrans.localId= Rechazo de TC;
+					//Next transition is  Rechazo_TC
+					edroomCurrentTrans.localId= Rechazo_TC;
 					edroomCurrentTrans.distanceToContext = 0;
 					edroomValidMsg=true;
 				 }

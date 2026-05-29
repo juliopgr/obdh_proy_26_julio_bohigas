@@ -442,7 +442,7 @@ public:
 		//!Transition Identifiers
 		enum TEDROOMTransitionID{Transicion0,
 			DronFlying,
-			Rechazo de TC,
+			Rechazo_TC,
 			DroneLand,
 			Ejecucion_Normal,
 			EDROOMMemoryTrans };
