@@ -45,6 +45,8 @@ public:
 							SDroneTC, 
 							SDroneRec, 
 							SDroneReady, 
+							SDroneFly, 
+							SDroneGround, 
 							SBKGTC, 
 							EDROOMIRQsignal, 
 							SHK_FDIR_TC, 
@@ -224,6 +226,8 @@ public:
 		SDroneTC,
 		SDroneRec,
 		SDroneReady,
+		SDroneFly,
+		SDroneGround,
 		SBKGTC,
 		EDROOMIRQsignal,
 		SHK_FDIR_TC,
@@ -252,8 +256,7 @@ public:
 		enum TEDROOMStateID{I,
 			Ready,
 			Reboot,
-			ValidTC,
-			TCREC};
+			ValidTC};
 
 		//!Transition Identifiers
 		enum TEDROOMTransitionID{Init,
@@ -266,12 +269,6 @@ public:
 			HandleTC_FwdBKGTC,
 			HandleTC_FwdDroneTC,
 			HandleTC_ExecPrioTC,
-			NewEvAction,
-			HandleREC,
-			HandleREC_FdirRec,
-			HandleREC_DroneRec,
-			HandleREC_Bckg_REC,
-			HandleREC_PrioRec,
 			EDROOMMemoryTrans };
 
 
@@ -343,6 +340,11 @@ public:
 		 * \brief  
 		 */
 		void	FExecRebootTC();
+
+		/**
+		 * \brief  
+		 */
+		void	FFDroneRecTC();
 
 		/**
 		 * \brief  
@@ -419,11 +421,6 @@ public:
 		 */
 		bool	GToReboot();
 
-		/**
-		 * \brief 
-		 */
-		void	FFDroneRecTC();
-
 	};
 
 	// ***********************************************************************
@@ -439,10 +436,15 @@ public:
 	protected:
 
 		//! State Identifiers
-		enum TEDROOMStateID{Standby};
+		enum TEDROOMStateID{Standby,
+			DroneFly};
 
 		//!Transition Identifiers
 		enum TEDROOMTransitionID{Transicion0,
+			DronFlying,
+			Rechazo de TC,
+			DroneLand,
+			Ejecucion_Normal,
 			EDROOMMemoryTrans };
 
 
@@ -522,6 +524,16 @@ public:
 
 		TEDROOMTransId EDROOMStandbyArrival();
 
+		// ***********************************************************************
+
+		// Leaf SubState DroneFly
+
+		// ***********************************************************************
+
+
+
+		TEDROOMTransId EDROOMDroneFlyArrival();
+
 	};
 
 	// ***********************************************************************
@@ -581,16 +593,6 @@ public:
 
 
 		TEDROOMTransId EDROOMValidTCArrival();
-
-		// ***********************************************************************
-
-		// JoinPoint TCREC
-
-		// ***********************************************************************
-
-
-
-		TEDROOMTransId EDROOMTCRECArrival();
 
 		// ***********************************************************************
 

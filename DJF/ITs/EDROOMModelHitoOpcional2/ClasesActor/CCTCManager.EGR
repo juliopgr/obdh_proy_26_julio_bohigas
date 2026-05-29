@@ -5,8 +5,8 @@
 0
 0
 [Modificado]
-0
-0
+1
+1
 0
 [Estructura]
 [Version Estructura]
@@ -126,7 +126,7 @@ External
 Top
 NULL
 [Subestados]
-5
+4
 [Version SubEstados]
 3
 I
@@ -181,21 +181,8 @@ ValidTC
 0
 485 590 143 43
 [FinObjetoGrafico]
-TCREC
-;
-;
-;
-;
-;
-1
-1
-[ObjetoGrafico]
-[Version Objeto Grafico]
-0
-314 571 90 30
-[FinObjetoGrafico]
 [PuntosEleccion]
-3
+2
 [Version PuntosEleccion]
 2
 NewRxTC
@@ -211,13 +198,6 @@ HandleTC
 [Version Objeto Grafico]
 0
 536 317 35 35
-[FinObjetoGrafico]
-HandleREC
-0
-[ObjetoGrafico]
-[Version Objeto Grafico]
-0
-394 521 35 35
 [FinObjetoGrafico]
 NewRxTC
 0
@@ -350,82 +330,8 @@ FFwdDroneTC();
 0
 553 351 322 386 2
 [FinGraficoRama]
-HandleREC
-0
-[Ramas]
-4
-[Version Ramas]
-5
-FdirRec
-GFwdToHK_FDIR()
-Ready
-DSubEst
-;
- 
- 
- 
-;
-FFwdHK_FDIRTC();
-;
-;
-[GraficoRama]
-[Version GraficoRama]
-0
-394 538 306 461 3
-[FinGraficoRama]
-DroneRec
-GFwdDroneTC()
-Ready
-DSubEst
-;
- 
- 
- 
-;
-FFDroneRecTC();
-;
-;
-[GraficoRama]
-[Version GraficoRama]
-0
-399 524 267 461 3
-[FinGraficoRama]
-Bckg_REC
-GFwdBKGTC()
-Ready
-DSubEst
-;
- 
- 
- 
-;
-FFwdBKGTC();
-;
-;
-[GraficoRama]
-[Version GraficoRama]
-0
-405 521 322 446 3
-[FinGraficoRama]
-PrioRec
-true
-Ready
-DSubEst
-FExecPrioTC();
- 
- 
- 
-;
-;
-;
-;
-[GraficoRama]
-[Version GraficoRama]
-0
-411 521 322 421 3
-[FinGraficoRama]
 [Transiciones]
-5
+3
 [Version Transicion]
 5
 Init
@@ -496,52 +402,6 @@ FTCExecCtrl();
 [Version GraficoTransicion]
 0
 560 590 553 351 3
-[FinGraficoTransicion]
-NewEvAction
-Ready
-OSubEst
-TCREC
-DSubEst
-;
-[Trigger]
-HK_FDIRCtrl
-SEvAction
-true
- 
- 
- 
-FGetEvAction();
-;
-;
-0
-;
-[GraficoTransicion]
-[Version GraficoTransicion]
-0
-312 461 314 581 0
-[FinGraficoTransicion]
-HandleREC
-TCREC
-OSubEst
-HandleREC
-DPEleccion
-FTCExecCtrl();
-[Trigger]
- 
- 
- 
- 
- 
- 
-;
-;
-;
-0
-;
-[GraficoTransicion]
-[Version GraficoTransicion]
-0
-393 571 411 555 1
 [FinGraficoTransicion]
 [VariablesConstantes]
 3
@@ -830,7 +690,7 @@ Ready
 Ready
 Top
 [Subestados]
-1
+2
 [Version SubEstados]
 3
 Standby
@@ -846,12 +706,25 @@ Standby
 0
 181 259 90 60
 [FinObjetoGrafico]
+DroneFly
+;
+;
+;
+;
+;
+0
+0
+[ObjetoGrafico]
+[Version Objeto Grafico]
+0
+352 438 90 60
+[FinObjetoGrafico]
 [PuntosEleccion]
 0
 [Version PuntosEleccion]
 2
 [Transiciones]
-1
+5
 [Version Transicion]
 5
 Transicion0
@@ -876,6 +749,98 @@ FInvokeDroneSetUp();
 [Version GraficoTransicion]
 0
 47 138 181 269 0
+[FinGraficoTransicion]
+DronFlying
+Standby
+OSubEst
+DroneFly
+DSubEst
+;
+[Trigger]
+DroneMngCtrl
+SDroneFly
+true
+ 
+ 
+ 
+;
+;
+;
+0
+;
+[GraficoTransicion]
+[Version GraficoTransicion]
+0
+271 292 352 460 0
+[FinGraficoTransicion]
+Rechazo de TC
+DroneFly
+OSubEst
+DroneFly
+DSubEst
+FMngTCRejection();
+[Trigger]
+RxTC
+EDROOMIRQsignal
+true
+ 
+ 
+ 
+FGetTC();
+;
+;
+0
+;
+[GraficoTransicion]
+[Version GraficoTransicion]
+0
+419 498 370 498 5
+[FinGraficoTransicion]
+DroneLand
+DroneFly
+OSubEst
+Standby
+DSubEst
+;
+[Trigger]
+DroneMngCtrl
+SDroneGround
+true
+ 
+ 
+ 
+;
+;
+;
+0
+;
+[GraficoTransicion]
+[Version GraficoTransicion]
+0
+432 438 271 271 3
+[FinGraficoTransicion]
+Ejecucion_Normal
+Standby
+OSubEst
+NewRxTC
+DPSalida
+;
+[Trigger]
+RxTC
+EDROOMIRQsignal
+true
+ 
+ 
+ 
+;
+;
+;
+0
+;
+[GraficoTransicion]
+[Version GraficoTransicion]
+0
+257 319 369 698 0
 [FinGraficoTransicion]
 [VariablesConstantes]
 0

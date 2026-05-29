@@ -39,7 +39,9 @@ public:
 							SDroneSetUp, 
 							SDroneTC, 
 							SDroneRec, 
-							SDroneReady };
+							SDroneReady, 
+							SDroneFly, 
+							SDroneGround };
 
 	/**
 	 * \class CCDroneMng::CEDROOMMemory
@@ -179,7 +181,9 @@ public:
 		SDroneSetUp,
 		SDroneTC,
 		SDroneRec,
-		SDroneReady };
+		SDroneReady,
+		SDroneFly,
+		SDroneGround };
 
 
 		friend class CCDroneMng;
@@ -305,6 +309,16 @@ public:
 		 * \brief  
 		 */
 		bool	GFlightPlanDone();
+
+		/**
+		 * \brief 
+		 */
+		void	FSendFly();
+
+		/**
+		 * \brief 
+		 */
+		void	FSendGround();
 
 	};
 
