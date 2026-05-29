@@ -5,8 +5,8 @@
 0
 0
 [Modificado]
-0
-0
+1
+1
 0
 [Estructura]
 [Version Estructura]
@@ -187,11 +187,11 @@ GFlightPlanDone()
 Ready
 DSubEst
 FToReady();
-
  
-
+ 
+ 
 ;
-FSendGround();
+;
 ;
 ;
 [GraficoRama]
@@ -227,11 +227,11 @@ GExecFlightPlan()
 FlightPlan
 DSubEst
 FInitFlightPlan();
-
  
-
+ 
+ 
 ;
-FSendFly();
+;
 ;
 ;
 [GraficoRama]
@@ -368,7 +368,7 @@ Pr_Time
 Variable
 0
 [Metodos]
-12
+10
 [Version Metodos]
 21
 BasicAction
@@ -525,36 +525,6 @@ GFlightPlanDone()
  
  
 return pus_service129_flight_plan_done();
-SendMsg
-FSendFly()
-0
-0
-0
-0
-1
-
-0
-[ServiceRequest]
-send
-DroneMngCtrl
-SDroneFly
-NULL
-EDROOMprioNormal
-SendMsg
-FSendGround()
-0
-0
-0
-0
-1
-
-0
-[ServiceRequest]
-send
-DroneMngCtrl
-SDroneGround
-NULL
-EDROOMprioNormal
 [MaquinasSubEstados]
 0
 [FinMaquinasSubEstados]

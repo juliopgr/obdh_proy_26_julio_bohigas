@@ -191,26 +191,6 @@ return pus_service129_flight_plan_done();
 
 
 
-void	CCDroneMng::EDROOM_CTX_Top_0::FSendFly()
-
-{
-
-   //Send message 
-   DroneMngCtrl.send(SDroneFly); 
-}
-
-
-
-void	CCDroneMng::EDROOM_CTX_Top_0::FSendGround()
-
-{
-
-   //Send message 
-   DroneMngCtrl.send(SDroneGround); 
-}
-
-
-
 	//********************************** Pools *************************************
 
 
@@ -275,8 +255,6 @@ void CCDroneMng::EDROOM_SUB_Top_0::EDROOMBehaviour()
 				{
 					//Execute Action 
 					FInitFlightPlan();
-					//Send Asynchronous Message 
-					FSendFly();
 
 					//Branch taken is ExecTC_InitFlightPlan
 					edroomCurrentTrans.localId =
@@ -307,8 +285,6 @@ void CCDroneMng::EDROOM_SUB_Top_0::EDROOMBehaviour()
 				{
 					//Execute Action 
 					FToReady();
-					//Send Asynchronous Message 
-					FSendGround();
 
 					//Branch taken is CtrlAlgorithm_PlanDone
 					edroomCurrentTrans.localId =
