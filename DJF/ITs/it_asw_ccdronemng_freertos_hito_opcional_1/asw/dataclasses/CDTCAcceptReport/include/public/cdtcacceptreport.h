@@ -17,6 +17,7 @@ class CDTCAcceptReport{
 		mAcceptReport.accept_status=TCAcceptationNotProcessed;
 	}
 
+
 	//!return true if accepted
 	bool IsAccepted(){
 		return (TCAcceptationOK== mAcceptReport.accept_status);

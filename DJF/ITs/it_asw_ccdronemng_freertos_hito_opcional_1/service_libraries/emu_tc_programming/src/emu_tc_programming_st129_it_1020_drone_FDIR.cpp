@@ -45,6 +45,7 @@
 #define FT_1020_TIME_step4 (OBT_AFTER_POWER_ON + 10)
 #define FT_1020_TIME_step5 (OBT_AFTER_POWER_ON + 12)
 #define FT_1020_TIME_step6 (OBT_AFTER_POWER_ON + 14)
+#define FT_1020_TIME_step8 (OBT_AFTER_POWER_ON + 15)
 
 #define FDIR_WIND_FLOAT_LIMIT 22.0
 #define FDIR_WIND_UINT32_LIMIT ((4096.0/60.0)*FDIR_WIND_FLOAT_LIMIT)
@@ -86,6 +87,9 @@ EmuGSS_TCProgram129_1 prog_FT_1020_step5(FT_1020_TIME_step5,
 
 EmuGSS_TCProgram129_3 prog_FT_1020_step6(FT_1020_TIME_step6,
 		"IT_UAH_DRONE_1010 step 6, Exec Flight Plan");
+
+EmuGSS_TCProgram129_4 prog_IT_1010_step_3(FT_1020_TIME_step8,
+		"IT_UAH_DRONE_1010 step 3, Abort Flight Plan");
 
 
 
