@@ -1,0 +1,71 @@
+Real_Time_Situation (
+   Generation_Tool    => "MAST Schedulability Analysis, version 1.7.0.0",
+   Generation_Profile => "C:\Users\julit\OneDrive\Documentos\mast-bin-win-1-7-0-0\mast_analysis.exe default C:\Users\julit\OneDrive\Documentos\Mast\HITO C:\Users\julit\OneDrive\Documentos\Mast\HITO.out",
+   Generation_Date    => 2026-05-19T15:42:08);
+
+Transaction (
+   Name     => drone_ctrl_transact,
+   Results  => 
+       ((Type                          => Timing_Result,
+         Event_Name                    => dl_ev_flght_ctrl,
+         Num_Of_Suspensions            => 1,
+         Worst_Blocking_Time           => 1.000E-04,
+         Worst_Global_Response_Times   => 
+            ((Referenced_Event => ev_flight_ctrl,
+              Time_Value       => 0.051268)),
+         Best_Global_Response_Times    => 
+            ((Referenced_Event => ev_flight_ctrl,
+              Time_Value       => 0.050102)),
+         Jitters                       => 
+            ((Referenced_Event => ev_flight_ctrl,
+              Time_Value       => 0.001166)))));
+
+Transaction (
+   Name     => hk_fdir_transact,
+   Results  => 
+       ((Type                          => Timing_Result,
+         Event_Name                    => dl_ev_hk,
+         Num_Of_Suspensions            => 1,
+         Worst_Blocking_Time           => 1.000E-04,
+         Worst_Global_Response_Times   => 
+            ((Referenced_Event => ev_hk,
+              Time_Value       => 0.166224)),
+         Best_Global_Response_Times    => 
+            ((Referenced_Event => ev_hk,
+              Time_Value       => 0.012306)),
+         Jitters                       => 
+            ((Referenced_Event => ev_hk,
+              Time_Value       => 0.153918))),
+        (Type                          => Timing_Result,
+         Event_Name                    => ev_sevaction,
+         Num_Of_Suspensions            => 0,
+         Worst_Blocking_Time           => 0.000,
+         Worst_Global_Response_Times   => 
+            ((Referenced_Event => ev_hk,
+              Time_Value       => 0.062484)),
+         Best_Global_Response_Times    => 
+            ((Referenced_Event => ev_hk,
+              Time_Value       => 0.010102)),
+         Jitters                       => 
+            ((Referenced_Event => ev_hk,
+              Time_Value       => 0.052382))),
+        (Type                          => Timing_Result,
+         Event_Name                    => ev_sdronetc,
+         Num_Of_Suspensions            => 1,
+         Worst_Blocking_Time           => 1.000E-04,
+         Worst_Global_Response_Times   => 
+            ((Referenced_Event => ev_hk,
+              Time_Value       => 0.114956)),
+         Best_Global_Response_Times    => 
+            ((Referenced_Event => ev_hk,
+              Time_Value       => 0.011304)),
+         Jitters                       => 
+            ((Referenced_Event => ev_hk,
+              Time_Value       => 0.103652)))));
+
+Processing_Resource (
+   Name     => leon3,
+   Results  => 
+       ((Type   => Utilization,
+         Total  => 51.43%)));
+
