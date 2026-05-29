@@ -29,7 +29,7 @@
 
 //Enable Config, the events defined are enabled by default
 uint32_t EvIDEnableConfig[4] =
-		{ 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000003 };
+		{ 0xFFFFFFFF, 0x0000000F, 0x0000000F, 0x0000000F };
 
 
 uint8_t pus_service5_cal_EvID_TM_5_X_subtype(uint16_t validEvID) {

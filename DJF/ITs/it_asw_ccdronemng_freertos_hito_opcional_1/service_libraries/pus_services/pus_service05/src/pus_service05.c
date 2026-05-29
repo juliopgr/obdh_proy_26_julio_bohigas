@@ -39,6 +39,8 @@ ev_type_t pus_service5_get_EvID_type(uint16_t EvID) {
 	int auxType = EvID >> 12;
 	int auxID = EvID & 0xFFF;
 
+
+
 	switch (auxType) {
 	case (1):
 		if (auxID <= PUS_5_InformativeEvents) {
@@ -56,13 +58,16 @@ ev_type_t pus_service5_get_EvID_type(uint16_t EvID) {
 		}
 		break;
 	case (4):
+
 		if (auxID <= PUS_5_HighSeverityAnomalyEvents) {
 			event_type = EvTypeHighSevAnomaly;
-		}
 
+
+		}
 		break;
 
 	default:
+
 		event_type = EvNotValid;
 	}
 

@@ -52,22 +52,24 @@
 
 
 EmuGSS_TCProgram5_5 prog_FT_00X1_stepy(FT_1020_TIME_step7
-,"FT_SOLO_EPD_ICU_SERV_05_00XX_StepY, Habilita EvID  ZZZ "
-    ,0X4004);
+,"FT_SOLO_EPD_ICU_SERV_05_00XX_StepY, Habilita EvID  0X4004 "
+    ,0x4004);
+
+
 
 EmuGSS_TCProgram12_5_Limit_UINT32 prog_FT_1020_step_0(FT_1020_TIME_step0,
 		"IT_UAH_DRONE_FDIR_1020 step 0, Config PMODID 0 for monitoring PID UAH_DRONE_Wind ",
 			0, UAH_DRONE_Wind, 1, 2 ,0 , 0x4001, FDIR_WIND_UINT32_LIMIT, 0x4004);
 
 EmuGSS_TCProgram19_1_Action_129_4 prog_FT_1020_step_1(FT_1020_TIME_step1,
-					"IT_UAH_DRONE_FDIR_1020 step 1, 0x4002 Action is Abort Flight",
+					"IT_UAH_DRONE_FDIR_1020 step 1, 0x4004 Action is Abort Flight",
 					0x4004);
 
 
 //TODO Complete steps 2, 3, 4, 5 & 6 to implement the Drone FDIR test 
 
 EmuGSS_TCProgram19_4 prog_FT_1020_step2(FT_1020_TIME_step2,
-		"IT_UAH_DRONE_FDIR_1020 step 2, 0x4002 Action enabled",
+		"IT_UAH_DRONE_FDIR_1020 step 2, 0x4004 Action enabled",
 		0x4004);
 
 
@@ -87,6 +89,22 @@ EmuGSS_TCProgram129_3 prog_FT_1020_step6(FT_1020_TIME_step6,
 
 
 
+
+/*
+EmuGSS_TCProgram129_2 prog_IT_1010_step_0(FT_1020_TIME_step0,
+		"IT_UAH_DRONE_1010 step 0, Set PID Params to 0.15, 0.1, 0.05",0.15,0.1,0.05);
+
+EmuGSS_TCProgram129_1 prog_IT_1010_step_1(FT_1020_TIME_step1,
+		"IT_UAH_DRONE_1010 step 1, Set Flight Plan x=-40.0, y=-120.5, z=18.3",-40.0,-120.5,18.3);
+
+EmuGSS_TCProgram129_3 prog_IT_1010_step_2(FT_1020_TIME_step2,
+		"IT_UAH_DRONE_1010 step 2, Exec Flight Plan");
+
+EmuGSS_TCProgram129_4 prog_IT_1010_step_3(FT_1020_TIME_step3,
+		"IT_UAH_DRONE_1010 step 3, Abort Flight Plan");
+
+
+		*/
 
 
 

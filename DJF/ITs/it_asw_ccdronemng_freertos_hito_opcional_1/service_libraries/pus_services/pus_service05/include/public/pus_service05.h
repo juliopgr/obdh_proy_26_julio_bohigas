@@ -51,8 +51,8 @@ extern "C" {
 //High Severity Anomaly EvIDs 0x4001,0x4002,0x4003, 0x4004,0x4005
 //#define PUS_5_HighSeverityAnomalyEvents 	5
 
-//High Severity Anomaly EvIDs 0x4001,0x4002,0x4003
-#define PUS_5_HighSeverityAnomalyEvents 	3
+//High Severity Anomaly EvIDs 0x4001,0x4002,0x4003, 0X4004
+#define PUS_5_HighSeverityAnomalyEvents 	5
 
 enum pus_service5_TM_5_X_EvIDs{TM_5_1_START_UP=0x1001,
 	TM_5_1_SENSOR_ON=0x1002,TM_5_1_SENSOR_OFF=0x1003,
