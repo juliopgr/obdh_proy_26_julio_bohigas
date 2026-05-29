@@ -375,10 +375,12 @@ void	CCTCManager::EDROOM_CTX_Ready_1::FForzarRechazo()
 
 {
 
-VAcceptReport.mAcceptReport = pus_service1_tc_acceptation_failure(&VCurrentTC.mTCHandler, TCAcceptationSubTypeError);
+// 1. Forzamos el envío de la TM[1,2] usando directamente el manejador de bajo nivel
+// y el motivo de fallo que elegimos (SubTypeError)
+pus_service1_tx_TM_1_2(&VCurrentTC.mTCHandler, TCAcceptationSubTypeError);
 
-
-VCurrentTC.MngTCRejection(VAcceptReport);
+// 2. Liberamos la memoria del paquete para que el sistema no se quede bloqueado
+tc_handler_free_memory(&VCurrentTC.mTCHandler);
 
 }
 
