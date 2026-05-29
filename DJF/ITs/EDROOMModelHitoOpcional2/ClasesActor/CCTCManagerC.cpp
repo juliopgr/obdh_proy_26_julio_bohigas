@@ -371,6 +371,19 @@ pSDroneSetUp_Data->DefaultKd=0.05;
 
 
 
+void	CCTCManager::EDROOM_CTX_Ready_1::FForzarRechazo()
+
+{
+
+VAcceptReport.mAcceptReport.accept_status = TCAcceptationAPIDError;
+
+
+VCurrentTC.MngTCRejection(VAcceptReport);
+
+}
+
+
+
 	//********************************** Pools *************************************
 
 	//CEDROOMPOOLCDTCHandler
@@ -809,7 +822,7 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::Arrival(
 				//Msg->Data Handling 
 				FGetTC();
 				//Execute Action 
-				FMngTCRejection();
+				FForzarRechazo();
 					//Go to the state DroneFly
 					edroomNextState = DroneFly;
 					edroomContextExit=0;

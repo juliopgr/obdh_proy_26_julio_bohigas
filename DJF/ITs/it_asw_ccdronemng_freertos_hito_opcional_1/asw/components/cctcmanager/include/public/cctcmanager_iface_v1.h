@@ -477,6 +477,11 @@ public:
 		 */
 		void	FInvokeDroneSetUp();
 
+		/**
+		 * \brief 
+		 */
+		void	FForzarRechazo();
+
 	};
 
 	// ***********************************************************************

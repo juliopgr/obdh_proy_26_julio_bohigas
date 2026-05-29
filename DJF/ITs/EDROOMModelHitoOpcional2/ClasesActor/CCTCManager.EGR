@@ -153,7 +153,7 @@ Ready
 [ObjetoGrafico]
 [Version Objeto Grafico]
 0
-179 146 143 315
+135 141 143 315
 [FinObjetoGrafico]
 Reboot
 FReboot();
@@ -237,7 +237,7 @@ FMngTCRejection();
 [GraficoRama]
 [Version GraficoRama]
 0
-235 611 179 420 3
+235 611 135 415 3
 [FinGraficoRama]
 HandleTC
 0
@@ -277,7 +277,7 @@ FExecPrioTC();
 [GraficoRama]
 [Version GraficoRama]
 0
-536 334 322 159 3
+536 334 278 154 3
 [FinGraficoRama]
 FwdHK_FDIRTC
 GFwdToHK_FDIR()
@@ -294,7 +294,7 @@ FFwdHK_FDIRTC();
 [GraficoRama]
 [Version GraficoRama]
 0
-538 344 322 255 3
+538 344 278 250 3
 [FinGraficoRama]
 FwdBKGTC
 GFwdBKGTC()
@@ -311,7 +311,7 @@ FFwdBKGTC();
 [GraficoRama]
 [Version GraficoRama]
 0
-545 351 322 332 3
+545 351 278 327 3
 [FinGraficoRama]
 FwdDroneTC
 GFwdDroneTC()
@@ -328,7 +328,7 @@ FFwdDroneTC();
 [GraficoRama]
 [Version GraficoRama]
 0
-553 351 322 386 2
+553 351 278 381 2
 [FinGraficoRama]
 [Transiciones]
 3
@@ -355,7 +355,7 @@ true
 [GraficoTransicion]
 [Version GraficoTransicion]
 0
-119 119 179 184 0
+119 119 135 179 0
 [FinGraficoTransicion]
 NewRxTC
 Ready
@@ -378,7 +378,7 @@ FGetTC();
 [GraficoTransicion]
 [Version GraficoTransicion]
 0
-252 461 252 594 2
+208 456 252 594 0
 [FinGraficoTransicion]
 HandleTC
 ValidTC
@@ -778,7 +778,7 @@ DroneFly
 OSubEst
 DroneFly
 DSubEst
-FMngTCRejection();
+FForzarRechazo();
 [Trigger]
 RxTC
 EDROOMIRQsignal
@@ -845,7 +845,7 @@ true
 [VariablesConstantes]
 0
 [Metodos]
-1
+2
 [Version Metodos]
 21
 InvokeMsg
@@ -872,6 +872,19 @@ DroneMngCtrl
 SDroneSetUp
 CDDroneConfig
 EDROOMprioVeryHigh
+BasicAction
+FForzarRechazo()
+0
+0
+0
+0
+1
+
+4
+VAcceptReport.mAcceptReport.accept_status = TCAcceptationAPIDError;
+
+
+VCurrentTC.MngTCRejection(VAcceptReport);
 [MaquinasSubEstados]
 0
 [FinMaquinasSubEstados]
