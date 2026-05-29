@@ -882,13 +882,19 @@ FForzarRechazo()
 "public/pus_service01.h"
 1
 
-6
-// 1. Forzamos el envío de la TM[1,2] usando directamente el manejador de bajo nivel
-// y el motivo de fallo que elegimos (SubTypeError)
-pus_service1_tx_TM_1_2(&VCurrentTC.mTCHandler, TCAcceptationSubTypeError);
+12
+// 1. Cargamos el paquete de forma normal
+VAcceptReport = VCurrentTC.DoAcceptation();
 
-// 2. Liberamos la memoria del paquete para que el sistema no se quede bloqueado
-tc_handler_free_memory(&VCurrentTC.mTCHandler);
+// 2. EL HACK: Usamos una función de la librería PUS para forzar un error de subservicio.
+// En lugar de modificar la variable privada de la clase C++, llamamos a la función global 
+// pasándole el reporte de aceptación nativo de bajo nivel para inyectar el fallo:
+VAcceptReport.mAcceptReport = pus_service1_tc_acceptation_failure(NULL, TCAcceptationSubTypeError);
+
+// 3. Ejecutamos tu llamada reglamentaria. 
+// Ahora que el reporte va camuflado con un SubTypeError, la función tx_TM_1_2 
+// entrará por el "case" correcto del switch y mandará la telemetría al GSS.
+VCurrentTC.MngTCRejection(VAcceptReport);
 [MaquinasSubEstados]
 0
 [FinMaquinasSubEstados]
