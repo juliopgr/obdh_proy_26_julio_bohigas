@@ -283,6 +283,24 @@ return VTCExecCtrl.IsRebootTC();
 
 
 
+void	CCTCManager::EDROOM_CTX_Top_0::FFDroneRecTC()
+
+{
+   //Allocate data from pool
+  CDTCHandler * pSDroneRec_Data = EDROOMPoolCDTCHandler.AllocData();
+	
+		// Complete Data 
+	
+	*pSDroneRec_Data=VCurrentTC;
+	
+	
+	
+   //Send message 
+   DroneMngCtrl.send(SDroneRec,pSDroneRec_Data,&EDROOMPoolCDTCHandler); 
+}
+
+
+
 // ***********************************************************************
 
 // class EDROOM_CTX_Ready_1
@@ -509,8 +527,8 @@ void CCTCManager::EDROOM_SUB_Top_0::EDROOMBehaviour()
 			case (NewEvAction):
 				//Msg->Data Handling 
 				FGetEvAction();
-				//Next State is ValidTC
-				edroomNextState = ValidTC;
+				//Next State is TCREC
+				edroomNextState = TCREC;
 				break;
 			//To Choice Point HandleTC
 			case (HandleTC):
@@ -583,6 +601,64 @@ void CCTCManager::EDROOM_SUB_Top_0::EDROOMBehaviour()
 					edroomNextState = Ready;
 				 } 
 				break;
+			//To Choice Point HandleREC
+			case (HandleREC):
+
+				//Execute Action 
+				FTCExecCtrl();
+				//Evaluate Branch FdirRec
+				if( GFwdToHK_FDIR() )
+				{
+					//Send Asynchronous Message 
+					FFwdHK_FDIRTC();
+
+					//Branch taken is HandleREC_FdirRec
+					edroomCurrentTrans.localId =
+						HandleREC_FdirRec;
+
+					//Next State is Ready
+					edroomNextState = Ready;
+				 } 
+				//Evaluate Branch DroneRec
+				else if( GFwdDroneTC() )
+				{
+					//Send Asynchronous Message 
+					FFDroneRecTC();
+
+					//Branch taken is HandleREC_DroneRec
+					edroomCurrentTrans.localId =
+						HandleREC_DroneRec;
+
+					//Next State is Ready
+					edroomNextState = Ready;
+				 } 
+				//Evaluate Branch Bckg_REC
+				else if( GFwdBKGTC() )
+				{
+					//Send Asynchronous Message 
+					FFwdBKGTC();
+
+					//Branch taken is HandleREC_Bckg_REC
+					edroomCurrentTrans.localId =
+						HandleREC_Bckg_REC;
+
+					//Next State is Ready
+					edroomNextState = Ready;
+				 } 
+				//Default Branch PrioRec
+				else
+				{
+					//Execute Action 
+					FExecPrioTC();
+
+					//Branch taken is HandleREC_PrioRec
+					edroomCurrentTrans.localId =
+						HandleREC_PrioRec;
+
+					//Next State is Ready
+					edroomNextState = Ready;
+				 } 
+				break;
 		}
 
 		//Entry into the Next State 
@@ -614,6 +690,12 @@ void CCTCManager::EDROOM_SUB_Top_0::EDROOMBehaviour()
 			case (ValidTC):
 				//Arrival to join point ValidTC
 				edroomCurrentTrans=EDROOMValidTCArrival();
+				break;
+
+				//Go to the join point TCREC
+			case (TCREC):
+				//Arrival to join point TCREC
+				edroomCurrentTrans=EDROOMTCRECArrival();
 				break;
 
 		}
@@ -675,6 +757,28 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Top_0::EDROOMValidTCArrival()
 
 	//Next transition is  HandleTC
 	edroomCurrentTrans.localId = HandleTC;
+	edroomCurrentTrans.distanceToContext = 0 ;
+	return(edroomCurrentTrans);
+
+}
+
+
+
+//	 ***********************************************************************
+
+//	 JoinPoint TCREC
+
+//	 ***********************************************************************
+
+
+
+TEDROOMTransId CCTCManager::EDROOM_SUB_Top_0::EDROOMTCRECArrival()
+{
+
+	TEDROOMTransId edroomCurrentTrans;
+
+	//Next transition is  HandleREC
+	edroomCurrentTrans.localId = HandleREC;
 	edroomCurrentTrans.distanceToContext = 0 ;
 	return(edroomCurrentTrans);
 
@@ -777,6 +881,26 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::Arrival(
 			edroomNextState = Standby;
 		//Invoke Synchronous Message 
 		FInvokeDroneSetUp();
+			break;
+		case (EDROOM_CTX_Top_0::HandleREC_FdirRec):
+			//Memory Entry 
+			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
+			edroomNextState = edroomCurrentState;
+			break;
+		case (EDROOM_CTX_Top_0::HandleREC_DroneRec):
+			//Memory Entry 
+			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
+			edroomNextState = edroomCurrentState;
+			break;
+		case (EDROOM_CTX_Top_0::HandleREC_Bckg_REC):
+			//Memory Entry 
+			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
+			edroomNextState = edroomCurrentState;
+			break;
+		case (EDROOM_CTX_Top_0::HandleREC_PrioRec):
+			//Memory Entry 
+			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
+			edroomNextState = edroomCurrentState;
 			break;
 		case (EDROOM_CTX_Top_0::EDROOMMemoryTrans):
 			//Memory Entry added

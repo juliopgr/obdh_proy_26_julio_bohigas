@@ -38,6 +38,7 @@ public:
 							EDROOMSignalDestroy, 
 							SDroneSetUp, 
 							SDroneTC, 
+							SDroneRec, 
 							SDroneReady };
 
 	/**
@@ -177,6 +178,7 @@ public:
 		EDROOMSignalDestroy,
 		SDroneSetUp,
 		SDroneTC,
+		SDroneRec,
 		SDroneReady };
 
 

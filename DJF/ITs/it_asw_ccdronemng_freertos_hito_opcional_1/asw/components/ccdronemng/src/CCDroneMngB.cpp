@@ -529,7 +529,7 @@ TEDROOMTransId CCDroneMng::EDROOM_SUB_Top_0::EDROOMFlightPlanArrival()
 
 				break;
 
-			case (SDroneTC): 
+			case (SDroneRec ): 
 
 				 if (*Msg->GetPInterface() == DroneMngCtrl)
 				{
