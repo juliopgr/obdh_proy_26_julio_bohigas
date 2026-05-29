@@ -17,6 +17,11 @@ class CDTCAcceptReport{
 		mAcceptReport.accept_status=TCAcceptationNotProcessed;
 	}
 
+// Nuevo constructor para crear reportes de rechazo directamente
+	CDTCAcceptReport(TTCAcceptationStatus status) {
+	    mAcceptReport.accept_status = status;
+	}
+
 	//!return true if accepted
 	bool IsAccepted(){
 		return (TCAcceptationOK== mAcceptReport.accept_status);

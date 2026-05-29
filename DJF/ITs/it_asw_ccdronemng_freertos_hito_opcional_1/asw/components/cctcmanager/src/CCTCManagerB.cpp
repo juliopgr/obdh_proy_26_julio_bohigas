@@ -375,14 +375,10 @@ void	CCTCManager::EDROOM_CTX_Ready_1::FForzarRechazo()
 
 {
 
-// 1. Creamos un reporte completamente limpio y vacío.
-// Al construirse, su estado interno se inicializa automáticamente como TCAcceptationNotProcessed.
-CDTCAcceptReport mi_reporte_vacio;
+// Creamos el reporte pasándole directamente el error de subservicio
+CDTCAcceptReport mi_reporte_error(TCAcceptationSubTypeError);
 
-// 2. Se lo pasamos directamente a MngTCRejection.
-// Como el estado "NotProcessed" no es un "éxito", la función de telemetría PUS
-// abortará la aceptación y generará el reporte de rechazo TM[1,2].
-VCurrentTC.MngTCRejection(mi_reporte_vacio);
+VCurrentTC.MngTCRejection(mi_reporte_error);
 
 }
 
