@@ -5,8 +5,8 @@
 0
 0
 [Modificado]
-0
-0
+1
+1
 0
 [Estructura]
 [Version Estructura]
@@ -343,7 +343,7 @@ DSubEst
 ;
 [Trigger]
 DroneMngCtrl
-SDroneRec
+SDroneTC
 true
  
  
