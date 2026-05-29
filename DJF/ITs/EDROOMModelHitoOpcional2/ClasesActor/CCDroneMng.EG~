@@ -343,7 +343,7 @@ DSubEst
 ;
 [Trigger]
 DroneMngCtrl
-SDroneRec 
+SDroneRec
 true
  
  

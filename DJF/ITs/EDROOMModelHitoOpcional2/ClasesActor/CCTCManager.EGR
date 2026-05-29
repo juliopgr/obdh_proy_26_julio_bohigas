@@ -5,8 +5,8 @@
 0
 0
 [Modificado]
-1
-1
+0
+0
 0
 [Estructura]
 [Version Estructura]
@@ -304,9 +304,9 @@ GFwdToHK_FDIR()
 Ready
 DSubEst
 ;
-
  
-
+ 
+ 
 ;
 FFwdHK_FDIRTC();
 ;
@@ -361,9 +361,9 @@ GFwdToHK_FDIR()
 Ready
 DSubEst
 ;
-
  
-
+ 
+ 
 ;
 FFwdHK_FDIRTC();
 ;
@@ -378,9 +378,9 @@ GFwdDroneTC()
 Ready
 DSubEst
 ;
-
  
-
+ 
+ 
 ;
 FFDroneRecTC();
 ;
@@ -395,9 +395,9 @@ GFwdBKGTC()
 Ready
 DSubEst
 ;
-
  
-
+ 
+ 
 ;
 FFwdBKGTC();
 ;
@@ -412,9 +412,9 @@ true
 Ready
 DSubEst
 FExecPrioTC();
-
  
-
+ 
+ 
 ;
 ;
 ;
@@ -481,9 +481,9 @@ HandleTC
 DPEleccion
 FTCExecCtrl();
 [Trigger]
-
-
-
+ 
+ 
+ 
  
  
  
@@ -527,9 +527,9 @@ HandleREC
 DPEleccion
 FTCExecCtrl();
 [Trigger]
-
-
-
+ 
+ 
+ 
  
  
  
@@ -590,6 +590,28 @@ FExecRebootTC()
  
 1
 VCurrentTC.ExecRebootTC();
+SendMsg
+FFDroneRecTC()
+0
+0
+0
+0
+1
+ 
+7
+	
+		// Complete Data 
+	
+	*pSDroneRec_Data=VCurrentTC;
+	
+	
+	
+[ServiceRequest]
+send
+DroneMngCtrl
+SDroneRec
+CDTCHandler
+EDROOMprioNormal
 SendMsg
 FFwdBKGTC()
 0
@@ -799,28 +821,6 @@ GToReboot()
  
 1
 return VTCExecCtrl.IsRebootTC();
-SendMsg
-FFDroneRecTC()
-0
-0
-0
-0
-1
-
-7
-	
-		// Complete Data 
-	
-	*pSDroneRec_Data=VCurrentTC;
-	
-	
-	
-[ServiceRequest]
-send
-DroneMngCtrl
-SDroneRec
-CDTCHandler
-EDROOMprioNormal
 [MaquinasSubEstados]
 1
 Ready
