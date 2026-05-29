@@ -357,7 +357,7 @@ bool CCTCManager::EDROOM_CTX_Ready_1::EDROOMSearchContextTrans(
 				{
 
 					 edroomValidMsg=true;
-					edroomCurrentTrans.localId = EDROOM_CTX_Top_0::NewEvAction;
+					edroomCurrentTrans.localId = EDROOM_CTX_Top_0::EvNewAction;
 					edroomCurrentTrans.distanceToContext = 1 ;
 				 }
 
@@ -400,6 +400,20 @@ pSDroneSetUp_Data->DefaultKd=0.05;
    //Invoke synchronous communication 
    MsgBack=DroneMngCtrl.invoke(SDroneSetUp,pSDroneSetUp_Data,
                                                      &EDROOMPoolCDDroneConfig); 
+}
+
+
+
+void	CCTCManager::EDROOM_CTX_Ready_1::FRechazo()
+
+{
+
+// 1. Usamos tu nuevo constructor pasándole el código de error que el switch sí reconoce
+VAcceptReport = CDTCAcceptReport(TCAcceptationSubTypeError);
+
+// 2. Despachamos el rechazo de forma nativa para que envíe la TM[1,2] y libere el manejador
+VCurrentTC.MngTCRejection(VAcceptReport);
+
 }
 
 
@@ -523,12 +537,12 @@ void CCTCManager::EDROOM_SUB_Top_0::EDROOMBehaviour()
 					edroomNextState = Ready;
 				 } 
 				break;
-			//Next Transition is NewEvAction
-			case (NewEvAction):
+			//Next Transition is EvNewAction
+			case (EvNewAction):
 				//Msg->Data Handling 
 				FGetEvAction();
-				//Next State is TCREC
-				edroomNextState = TCREC;
+				//Next State is ValidTC
+				edroomNextState = ValidTC;
 				break;
 			//To Choice Point HandleTC
 			case (HandleTC):
@@ -601,64 +615,6 @@ void CCTCManager::EDROOM_SUB_Top_0::EDROOMBehaviour()
 					edroomNextState = Ready;
 				 } 
 				break;
-			//To Choice Point HandleREC
-			case (HandleREC):
-
-				//Execute Action 
-				FTCExecCtrl();
-				//Evaluate Branch FdirRec
-				if( GFwdToHK_FDIR() )
-				{
-					//Send Asynchronous Message 
-					FFwdHK_FDIRTC();
-
-					//Branch taken is HandleREC_FdirRec
-					edroomCurrentTrans.localId =
-						HandleREC_FdirRec;
-
-					//Next State is Ready
-					edroomNextState = Ready;
-				 } 
-				//Evaluate Branch DroneRec
-				else if( GFwdDroneTC() )
-				{
-					//Send Asynchronous Message 
-					FFDroneRecTC();
-
-					//Branch taken is HandleREC_DroneRec
-					edroomCurrentTrans.localId =
-						HandleREC_DroneRec;
-
-					//Next State is Ready
-					edroomNextState = Ready;
-				 } 
-				//Evaluate Branch Bckg_REC
-				else if( GFwdBKGTC() )
-				{
-					//Send Asynchronous Message 
-					FFwdBKGTC();
-
-					//Branch taken is HandleREC_Bckg_REC
-					edroomCurrentTrans.localId =
-						HandleREC_Bckg_REC;
-
-					//Next State is Ready
-					edroomNextState = Ready;
-				 } 
-				//Default Branch PrioRec
-				else
-				{
-					//Execute Action 
-					FExecPrioTC();
-
-					//Branch taken is HandleREC_PrioRec
-					edroomCurrentTrans.localId =
-						HandleREC_PrioRec;
-
-					//Next State is Ready
-					edroomNextState = Ready;
-				 } 
-				break;
 		}
 
 		//Entry into the Next State 
@@ -690,12 +646,6 @@ void CCTCManager::EDROOM_SUB_Top_0::EDROOMBehaviour()
 			case (ValidTC):
 				//Arrival to join point ValidTC
 				edroomCurrentTrans=EDROOMValidTCArrival();
-				break;
-
-				//Go to the join point TCREC
-			case (TCREC):
-				//Arrival to join point TCREC
-				edroomCurrentTrans=EDROOMTCRECArrival();
 				break;
 
 		}
@@ -764,28 +714,6 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Top_0::EDROOMValidTCArrival()
 
 
 
-//	 ***********************************************************************
-
-//	 JoinPoint TCREC
-
-//	 ***********************************************************************
-
-
-
-TEDROOMTransId CCTCManager::EDROOM_SUB_Top_0::EDROOMTCRECArrival()
-{
-
-	TEDROOMTransId edroomCurrentTrans;
-
-	//Next transition is  HandleREC
-	edroomCurrentTrans.localId = HandleREC;
-	edroomCurrentTrans.distanceToContext = 0 ;
-	return(edroomCurrentTrans);
-
-}
-
-
-
 	// ***********************************************************************
 
 	// Leaf SubState  Reboot
@@ -846,6 +774,8 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::Arrival(
 
 	TEDROOMTransId edroomCurrentTrans;
 
+	int edroomContextExit=0;
+
 	//Transition at Context Entry
 	switch (arrivingTrans)
 	{
@@ -875,26 +805,6 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::Arrival(
 			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
 			edroomNextState = edroomCurrentState;
 			break;
-		case (EDROOM_CTX_Top_0::HandleREC_FdirRec):
-			//Memory Entry 
-			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
-			edroomNextState = edroomCurrentState;
-			break;
-		case (EDROOM_CTX_Top_0::HandleREC_DroneRec):
-			//Memory Entry 
-			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
-			edroomNextState = edroomCurrentState;
-			break;
-		case (EDROOM_CTX_Top_0::HandleREC_Bckg_REC):
-			//Memory Entry 
-			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
-			edroomNextState = edroomCurrentState;
-			break;
-		case (EDROOM_CTX_Top_0::HandleREC_PrioRec):
-			//Memory Entry 
-			edroomCurrentTrans.localId = EDROOMMemoryTrans ;
-			edroomNextState = edroomCurrentState;
-			break;
 		//From entry point Init
 		case (EDROOM_CTX_Top_0::Init):
 			edroomCurrentTrans.localId= Transicion0;
@@ -914,6 +824,9 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::Arrival(
 			break;
 	}
 
+	do
+	{
+
 		//Entry into the Next State 
 		switch(edroomNextState)
 		{
@@ -924,9 +837,50 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::Arrival(
 				edroomCurrentTrans=EDROOMStandbyArrival();
 				break;
 
+				//Go to the state SubEstado1
+			case (SubEstado1):
+				//Arrival to state SubEstado1
+				edroomCurrentTrans=EDROOMSubEstado1Arrival();
+				break;
+
 		}
 
 		edroomCurrentState=edroomNextState;
+
+		if (edroomCurrentTrans.distanceToContext == 0)
+		{
+
+			switch (edroomCurrentTrans.localId)
+			{
+
+				case (RechazoTC ):
+					//Go to the state SubEstado1
+					edroomNextState = SubEstado1;
+					edroomContextExit=0;
+					break;
+
+				case (ModoNominal):
+					//Go to the state Standby
+					edroomNextState = Standby;
+					edroomContextExit=0;
+					break;
+
+				case (Rechazar):
+				//Execute Action 
+				FRechazo();
+					//Go to the state SubEstado1
+					edroomNextState = SubEstado1;
+					edroomContextExit=0;
+					break;
+
+			}
+
+		}else
+		{
+			edroomContextExit=1;
+		}
+
+	}while(0 == edroomContextExit);
 
 	edroomCurrentTrans.distanceToContext--;
 
@@ -964,6 +918,89 @@ TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::EDROOMStandbyArrival()
 	{
 
 		EDROOMNewMessage ();
+
+		switch(Msg->signal)
+		{
+
+			case (SDroneFly): 
+
+				 if (*Msg->GetPInterface() == DroneMngCtrl)
+				{
+
+					//Next transition is  RechazoTC 
+					edroomCurrentTrans.localId= RechazoTC ;
+					edroomCurrentTrans.distanceToContext = 0;
+					edroomValidMsg=true;
+				 }
+
+				break;
+
+		};
+
+		if (false == edroomValidMsg)
+		{
+			 edroomValidMsg = EDROOMSearchContextTrans(edroomCurrentTrans);
+
+		}
+
+	} while (false == edroomValidMsg);
+
+	return(edroomCurrentTrans);
+
+}
+
+
+
+	// ***********************************************************************
+
+	// Leaf SubState  SubEstado1
+
+	// ***********************************************************************
+
+
+
+TEDROOMTransId CCTCManager::EDROOM_SUB_Ready_1::EDROOMSubEstado1Arrival()
+{
+
+	TEDROOMTransId edroomCurrentTrans;
+
+	bool edroomValidMsg=false;
+
+	do
+	{
+
+		EDROOMNewMessage ();
+
+		switch(Msg->signal)
+		{
+
+			case (SDroneGround): 
+
+				 if (*Msg->GetPInterface() == DroneMngCtrl)
+				{
+
+					//Next transition is  ModoNominal
+					edroomCurrentTrans.localId= ModoNominal;
+					edroomCurrentTrans.distanceToContext = 0;
+					edroomValidMsg=true;
+				 }
+
+				break;
+
+			case (EDROOMIRQsignal): 
+
+				 if (*Msg->GetPInterface() == RxTC)
+				{
+
+					//Next transition is  Rechazar
+					edroomCurrentTrans.localId= Rechazar;
+					edroomCurrentTrans.distanceToContext = 0;
+					edroomValidMsg=true;
+				 }
+
+				break;
+
+		};
 
 		if (false == edroomValidMsg)
 		{

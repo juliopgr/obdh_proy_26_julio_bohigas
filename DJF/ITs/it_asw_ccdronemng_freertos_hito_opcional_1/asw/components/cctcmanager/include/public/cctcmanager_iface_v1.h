@@ -45,6 +45,8 @@ public:
 							SDroneTC, 
 							SDroneRec, 
 							SDroneReady, 
+							SDroneGround, 
+							SDroneFly, 
 							SBKGTC, 
 							EDROOMIRQsignal, 
 							SHK_FDIR_TC, 
@@ -224,6 +226,8 @@ public:
 		SDroneTC,
 		SDroneRec,
 		SDroneReady,
+		SDroneGround,
+		SDroneFly,
 		SBKGTC,
 		EDROOMIRQsignal,
 		SHK_FDIR_TC,
@@ -252,8 +256,7 @@ public:
 		enum TEDROOMStateID{I,
 			Ready,
 			Reboot,
-			ValidTC,
-			TCREC};
+			ValidTC};
 
 		//!Transition Identifiers
 		enum TEDROOMTransitionID{Init,
@@ -266,12 +269,7 @@ public:
 			HandleTC_FwdBKGTC,
 			HandleTC_FwdDroneTC,
 			HandleTC_ExecPrioTC,
-			NewEvAction,
-			HandleREC,
-			HandleREC_FdirRec,
-			HandleREC_DroneRec,
-			HandleREC_Bckg_REC,
-			HandleREC_PrioRec,
+			EvNewAction,
 			EDROOMMemoryTrans };
 
 
@@ -439,10 +437,14 @@ public:
 	protected:
 
 		//! State Identifiers
-		enum TEDROOMStateID{Standby};
+		enum TEDROOMStateID{Standby,
+			SubEstado1};
 
 		//!Transition Identifiers
 		enum TEDROOMTransitionID{Transicion0,
+			RechazoTC ,
+			ModoNominal,
+			Rechazar,
 			EDROOMMemoryTrans };
 
 
@@ -474,6 +476,11 @@ public:
 		 * \brief  
 		 */
 		void	FInvokeDroneSetUp();
+
+		/**
+		 * \brief 
+		 */
+		void	FRechazo();
 
 	};
 
@@ -521,6 +528,16 @@ public:
 
 
 		TEDROOMTransId EDROOMStandbyArrival();
+
+		// ***********************************************************************
+
+		// Leaf SubState SubEstado1
+
+		// ***********************************************************************
+
+
+
+		TEDROOMTransId EDROOMSubEstado1Arrival();
 
 	};
 
@@ -581,16 +598,6 @@ public:
 
 
 		TEDROOMTransId EDROOMValidTCArrival();
-
-		// ***********************************************************************
-
-		// JoinPoint TCREC
-
-		// ***********************************************************************
-
-
-
-		TEDROOMTransId EDROOMTCRECArrival();
 
 		// ***********************************************************************
 

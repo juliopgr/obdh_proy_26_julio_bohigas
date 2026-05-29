@@ -126,6 +126,16 @@ pus_service129_init_flight_plan();
 
 
 
+void	CCDroneMng::EDROOM_CTX_Top_0::FNOTC()
+
+{
+
+   //Send message 
+   DroneMngCtrl.send(SDroneFly); 
+}
+
+
+
 void	CCDroneMng::EDROOM_CTX_Top_0::FProgNextCtrl()
 
 {
@@ -151,6 +161,16 @@ void	CCDroneMng::EDROOM_CTX_Top_0::FReplyDroneReady()
 pus_service129_drone_ready();
    //Reply synchronous communication
    Msg->reply(SDroneReady); 
+}
+
+
+
+void	CCDroneMng::EDROOM_CTX_Top_0::FSITC()
+
+{
+
+   //Send message 
+   DroneMngCtrl.send(SDroneGround); 
 }
 
 
@@ -255,6 +275,8 @@ void CCDroneMng::EDROOM_SUB_Top_0::EDROOMBehaviour()
 				{
 					//Execute Action 
 					FInitFlightPlan();
+					//Send Asynchronous Message 
+					FNOTC();
 
 					//Branch taken is ExecTC_InitFlightPlan
 					edroomCurrentTrans.localId =
@@ -285,6 +307,8 @@ void CCDroneMng::EDROOM_SUB_Top_0::EDROOMBehaviour()
 				{
 					//Execute Action 
 					FToReady();
+					//Send Asynchronous Message 
+					FSITC();
 
 					//Branch taken is CtrlAlgorithm_PlanDone
 					edroomCurrentTrans.localId =

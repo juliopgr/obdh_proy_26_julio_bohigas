@@ -39,7 +39,9 @@ public:
 							SDroneSetUp, 
 							SDroneTC, 
 							SDroneRec, 
-							SDroneReady };
+							SDroneReady, 
+							SDroneGround, 
+							SDroneFly };
 
 	/**
 	 * \class CCDroneMng::CEDROOMMemory
@@ -179,7 +181,9 @@ public:
 		SDroneSetUp,
 		SDroneTC,
 		SDroneRec,
-		SDroneReady };
+		SDroneReady,
+		SDroneGround,
+		SDroneFly };
 
 
 		friend class CCDroneMng;
@@ -284,12 +288,22 @@ public:
 		/**
 		 * \brief  
 		 */
+		void	FNOTC();
+
+		/**
+		 * \brief  
+		 */
 		void	FProgNextCtrl();
 
 		/**
 		 * \brief  
 		 */
 		void	FReplyDroneReady();
+
+		/**
+		 * \brief  
+		 */
+		void	FSITC();
 
 		/**
 		 * \brief  
