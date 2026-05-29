@@ -375,7 +375,7 @@ void	CCTCManager::EDROOM_CTX_Ready_1::FForzarRechazo()
 
 {
 
-VAcceptReport.mAcceptReport.accept_status = TCAcceptationAPIDError;
+VAcceptReport.mAcceptReport = pus_service1_tc_acceptation_failure(&VCurrentTC.mTCHandler, TCAcceptationSubTypeError);
 
 
 VCurrentTC.MngTCRejection(VAcceptReport);
