@@ -43,7 +43,6 @@ public:
 							EDROOMSignalDestroy, 
 							SDroneSetUp, 
 							SDroneTC, 
-							SDroneRec, 
 							SDroneReady, 
 							SBKGTC, 
 							EDROOMIRQsignal, 
@@ -222,7 +221,6 @@ public:
 		EDROOMSignalDestroy,
 		SDroneSetUp,
 		SDroneTC,
-		SDroneRec,
 		SDroneReady,
 		SBKGTC,
 		EDROOMIRQsignal,
@@ -252,8 +250,7 @@ public:
 		enum TEDROOMStateID{I,
 			Ready,
 			Reboot,
-			ValidTC,
-			TCREC};
+			ValidTC};
 
 		//!Transition Identifiers
 		enum TEDROOMTransitionID{Init,
@@ -267,11 +264,6 @@ public:
 			HandleTC_FwdDroneTC,
 			HandleTC_ExecPrioTC,
 			NewEvAction,
-			HandleREC,
-			HandleREC_FdirRec,
-			HandleREC_DroneRec,
-			HandleREC_Bckg_REC,
-			HandleREC_PrioRec,
 			EDROOMMemoryTrans };
 
 
@@ -418,11 +410,6 @@ public:
 		 * \brief  
 		 */
 		bool	GToReboot();
-
-		/**
-		 * \brief 
-		 */
-		void	FFDroneRecTC();
 
 	};
 
@@ -581,16 +568,6 @@ public:
 
 
 		TEDROOMTransId EDROOMValidTCArrival();
-
-		// ***********************************************************************
-
-		// JoinPoint TCREC
-
-		// ***********************************************************************
-
-
-
-		TEDROOMTransId EDROOMTCRECArrival();
 
 		// ***********************************************************************
 

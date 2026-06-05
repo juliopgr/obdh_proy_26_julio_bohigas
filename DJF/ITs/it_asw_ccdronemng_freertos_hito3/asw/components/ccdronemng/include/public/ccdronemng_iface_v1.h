@@ -38,7 +38,6 @@ public:
 							EDROOMSignalDestroy, 
 							SDroneSetUp, 
 							SDroneTC, 
-							SDroneRec, 
 							SDroneReady };
 
 	/**
@@ -178,7 +177,6 @@ public:
 		EDROOMSignalDestroy,
 		SDroneSetUp,
 		SDroneTC,
-		SDroneRec,
 		SDroneReady };
 
 
@@ -206,7 +204,7 @@ public:
 
 		//!Transition Identifiers
 		enum TEDROOMTransitionID{Init,
-			 transicion,
+			ToReady,
 			ExecTC,
 			ExecTC_InitFlightPlan,
 			ExecTC_WaitFP,

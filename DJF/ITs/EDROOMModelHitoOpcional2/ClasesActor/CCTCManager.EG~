@@ -318,9 +318,9 @@ GFwdDroneTC()
 Ready
 DSubEst
 ;
-
  
-
+ 
+ 
 ;
 FFwdDroneTC();
 ;
@@ -879,11 +879,11 @@ FRechazo()
 0
 0
 1
-
+ 
 5
 // 1. Usamos tu nuevo constructor pasándole el código de error que el switch sí reconoce
 VAcceptReport = CDTCAcceptReport(TCAcceptationSubTypeError);
-
+ 
 // 2. Despachamos el rechazo de forma nativa para que envíe la TM[1,2] y libere el manejador
 VCurrentTC.MngTCRejection(VAcceptReport);
 [MaquinasSubEstados]

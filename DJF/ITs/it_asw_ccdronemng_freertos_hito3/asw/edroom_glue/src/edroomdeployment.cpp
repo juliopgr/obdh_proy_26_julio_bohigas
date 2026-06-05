@@ -95,8 +95,6 @@ TEDROOMSignal CEDROOMSystemCommSAP::C2TCManager_PDroneMngCtrl__C5DroneMng_PDrone
  
 		case( CCTCManager::SDroneTC):	 signalIn=CCDroneMng::SDroneTC; break;
  
-		case( CCTCManager::SDroneRec):	 signalIn=CCDroneMng::SDroneRec; break;
- 
 		default: signalIn=(TEDROOMSignal)(-1); break;
  
 	}

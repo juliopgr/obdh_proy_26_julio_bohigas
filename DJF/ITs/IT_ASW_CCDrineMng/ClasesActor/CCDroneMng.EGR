@@ -5,8 +5,8 @@
 0
 0
 [Modificado]
-0
-0
+1
+1
 0
 [Estructura]
 [Version Estructura]
@@ -266,7 +266,7 @@ true
 0
 116 121 263 171 0
 [FinGraficoTransicion]
- transicion
+ToReady
 SelfTest
 OSubEst
 Ready
